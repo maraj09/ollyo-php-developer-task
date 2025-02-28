@@ -1,9 +1,11 @@
 <?php
 
+use Ollyo\Task\Controllers\Controller;
 use Ollyo\Task\Routes;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/helper.php';
+require_once __DIR__ . '/src/Controllers/Controller.php';
 
 define('BASE_PATH', dirname(__FILE__));
 define('BASE_URL', baseUrl());
@@ -58,14 +60,8 @@ Routes::get('/checkout', function () use ($data) {
 
 Routes::post('/checkout', function ($request) {
     // @todo: Implement PayPal payment gateway integration here
-    // 1. Initialize PayPal API client with credentials
-    // 2. Create payment with order details from $data
-    // 3. Execute payment and handle response
-    // 4. If payment successful, save order and redirect to thank you page
-    // 5. If payment fails, redirect to error payment page with message
-
-    // Consider creating a dedicated controller class to handle payment processing
-    // This helps separate payment logic from routing and keeps code organized
+    $controller = new Controller();
+    $controller->handleCheckout($request);
 });
 
 // Register thank you & payment failed routes with corresponding views here.

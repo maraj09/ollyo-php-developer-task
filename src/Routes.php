@@ -42,7 +42,10 @@ class Routes {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $request = $this->getRequest();
-        
+
+        $pre_path = dirname($_SERVER['SCRIPT_NAME']);
+        $path = str_replace($pre_path, '', $path);
+
         if (isset(static::$routes[$method][$path])) {
             $callback = static::$routes[$method][$path];
 

@@ -51,6 +51,10 @@ if (!function_exists('view')) {
     function view(string $name, array $data) {
         // @todo: Complete the view function so that we could render a view with data.
         // e.g. view('checkout', $data);
+        extract($data); 
+        ob_start(); 
+        require __DIR__ . "/src/Views/{$name}.php"; 
+        return ob_get_clean();
     }
 }
 
